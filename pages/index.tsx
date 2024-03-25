@@ -1,9 +1,12 @@
 import { Rating } from "../components";
+import { withLayout } from "../layout/Layout";
 
-export default function Home() {
+function Home() {
   return (
     <>
       <Rating rating={3} isEditable />
     </>
   );
 }
+
+export default withLayout(Home);
