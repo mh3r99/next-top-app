@@ -1,15 +1,9 @@
-import { Button, Htag } from "../components";
+import { Rating } from "../components";
 
 export default function Home() {
   return (
     <>
-      <Htag tag="h1">Текст</Htag>
-      <Button appearance="primary" arrow="right">
-        Кнопка
-      </Button>
-      <Button appearance="ghost" arrow="down">
-        Кнопка
-      </Button>
+      <Rating rating={3} isEditable />
     </>
   );
 }
