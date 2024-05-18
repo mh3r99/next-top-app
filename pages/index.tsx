@@ -10,7 +10,6 @@ interface IHomeProps extends Record<string, unknown> {
 }
 
 function Home({ menu, firstCategory }: IHomeProps) {
-  console.log(menu);
   return (
     <>
       <Rating rating={3} isEditable />
