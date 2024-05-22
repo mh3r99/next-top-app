@@ -2,15 +2,17 @@ import { withLayout } from "../../layout/Layout";
 import { MenuItem } from "../../interfaces/menu.interface";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
-import { TopPageModel } from "../../interfaces/page.interface";
+import {
+  TopLevelCategory,
+  TopPageModel,
+} from "../../interfaces/page.interface";
 import { ParsedUrlQuery } from "querystring";
 import { ProductModel } from "../../interfaces/product.interface";
-
-const firstCategory = 0;
+import { firstLevelMenu } from "../../helpers";
 
 interface ICourseProps extends Record<string, unknown> {
   menu: MenuItem[];
-  firstCategory: number;
+  firstCategory: TopLevelCategory;
   page: TopPageModel;
   products: ProductModel[];
 }
@@ -21,15 +23,21 @@ function Course({ menu, page, products }: ICourseProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data: menu } = await axios.post<MenuItem[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
-    {
-      firstCategory,
-    },
-  );
+  let paths: string[] = [];
+  for (const m of firstLevelMenu) {
+    const { data: menu } = await axios.post<MenuItem[]>(
+      process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+      {
+        firstCategory: m.id,
+      },
+    );
+    paths = paths.concat(
+      menu.flatMap((s) => s.pages.map((p) => `/${m.route}/${p.alias}`)),
+    );
+  }
 
   return {
-    paths: menu.flatMap((m) => m.pages.map((p) => "/courses/" + p.alias)),
+    paths,
     fallback: true,
   };
 };
@@ -42,10 +50,20 @@ export const getStaticProps: GetStaticProps<ICourseProps> = async ({
     };
   }
 
+  const firstCategoryItem = firstLevelMenu.find(
+    (menu) => menu.route == params.type,
+  );
+
+  if (!firstCategoryItem) {
+    return {
+      notFound: true,
+    };
+  }
+
   const { data: menu } = await axios.post<MenuItem[]>(
     process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
     {
-      firstCategory,
+      firstCategory: firstCategoryItem.id,
     },
   );
 
@@ -64,7 +82,7 @@ export const getStaticProps: GetStaticProps<ICourseProps> = async ({
   return {
     props: {
       menu,
-      firstCategory,
+      firstCategory: firstCategoryItem.id,
       page,
       products,
     },
