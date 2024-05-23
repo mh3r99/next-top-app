@@ -1,4 +1,3 @@
-import { Rating } from "../components";
 import { withLayout } from "../layout/Layout";
 import { GetStaticProps } from "next";
 import axios from "axios";
@@ -10,11 +9,7 @@ interface IHomeProps extends Record<string, unknown> {
 }
 
 function Home({ menu, firstCategory }: IHomeProps) {
-  return (
-    <>
-      <Rating rating={3} isEditable />
-    </>
-  );
+  return <></>;
 }
 
 export const getStaticProps: GetStaticProps<IHomeProps> = async () => {
