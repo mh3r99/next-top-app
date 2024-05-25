@@ -9,17 +9,23 @@ import {
 import { ParsedUrlQuery } from "querystring";
 import { ProductModel } from "../../interfaces/product.interface";
 import { firstLevelMenu } from "../../helpers";
+import TopPageComponents from "../../page-components/TopPageComponents/TopPageComponents";
 
-interface ICourseProps extends Record<string, unknown> {
+interface ITopPageProps extends Record<string, unknown> {
   menu: MenuItem[];
   firstCategory: TopLevelCategory;
   page: TopPageModel;
   products: ProductModel[];
 }
 
-function Course({ menu, page, products }: ICourseProps) {
-  console.log({ menu, page, products });
-  return <></>;
+function TopPage({ firstCategory, page, products }: ITopPageProps) {
+  return (
+    <TopPageComponents
+      firstCategory={firstCategory}
+      page={page}
+      products={products}
+    />
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -41,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
-export const getStaticProps: GetStaticProps<ICourseProps> = async ({
+export const getStaticProps: GetStaticProps<ITopPageProps> = async ({
   params,
 }: GetStaticPropsContext<ParsedUrlQuery>) => {
   if (!params) {
@@ -89,4 +95,4 @@ export const getStaticProps: GetStaticProps<ICourseProps> = async ({
   };
 };
 
-export default withLayout(Course);
+export default withLayout(TopPage);
