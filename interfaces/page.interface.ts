@@ -35,5 +35,5 @@ export interface TopPageModel {
   advantages?: TopPageAdvantage[];
   createdAt: Date;
   updatedAt: Date;
-  hh: IHhData;
+  hh?: IHhData;
 }
