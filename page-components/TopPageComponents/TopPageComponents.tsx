@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import styles from './TopPageComponents.module.css';
-import { Htag, Tag, HhData, Paragraph } from '../../components';
+import { Htag, Tag, HhData } from '../../components';
 import { Advantages } from '../../components/Advantages/Advantages';
+import Sort, { SortEnum } from '../../components/Sort/Sort';
+import { sortReducer } from './sort.reducer';
 
 interface ITopPageComponentsProps extends Record<string, unknown> {
   firstCategory: TopLevelCategory;
@@ -16,6 +18,17 @@ const TopPageComponents: React.FC<ITopPageComponentsProps> = ({
   products,
   firstCategory,
 }) => {
+  const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(sortReducer, {
+    products,
+    sort: SortEnum.Rating,
+  });
+
+  const setSort = (sort: SortEnum) => {
+    dispatchSort({
+      type: sort,
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -25,9 +38,10 @@ const TopPageComponents: React.FC<ITopPageComponentsProps> = ({
             {products.length}
           </Tag>
         )}
+        <Sort sort={sort} setSort={setSort} />
         <span>Сортировка</span>
       </div>
-      <div>{products && products.map((p) => <div key={p._id}>{p.title}</div>)}</div>
+      <div>{sortedProducts && sortedProducts.map((p) => <div key={p._id}>{p.title}</div>)}</div>
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
         <Tag color="red" size="m">
