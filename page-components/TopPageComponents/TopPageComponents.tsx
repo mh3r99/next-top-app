@@ -2,9 +2,8 @@ import React, { useReducer } from 'react';
 import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import styles from './TopPageComponents.module.css';
-import { Htag, Tag, HhData } from '../../components';
-import { Advantages } from '../../components/Advantages/Advantages';
-import Sort, { SortEnum } from '../../components/Sort/Sort';
+import { Htag, Tag, HhData, Advantages } from '../../components';
+import  {  Sort, SortEnum } from '../../components/Sort/Sort';
 import { sortReducer } from './sort.reducer';
 
 interface ITopPageComponentsProps extends Record<string, unknown> {

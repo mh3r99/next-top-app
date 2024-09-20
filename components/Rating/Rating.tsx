@@ -1,13 +1,7 @@
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useEffect,
-  useState,
-  KeyboardEvent,
-} from "react";
-import styles from "./Rating.module.css";
-import cn from "classnames";
-import StarIcon from "./star.svg";
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useState, KeyboardEvent } from 'react';
+import styles from './Rating.module.css';
+import cn from 'classnames';
+import StarIcon from './star.svg';
 
 export interface RatingProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -16,15 +10,8 @@ export interface RatingProps
   setRating?: (rating: number) => void;
 }
 
-export const Rating = ({
-  isEditable,
-  rating,
-  setRating,
-  ...props
-}: RatingProps) => {
-  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
-    new Array(5).fill(<></>),
-  );
+export const Rating = ({ isEditable, rating, setRating, ...props }: RatingProps) => {
+  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
 
   useEffect(() => {
     constructRating(rating);
@@ -41,13 +28,10 @@ export const Rating = ({
           })}
           onMouseEnter={() => changeDisplay(i + 1)}
           onMouseLeave={() => changeDisplay(rating)}
-          onClick={() => onClick(i + 1)}
-        >
+          onClick={() => onClick(i + 1)}>
           <StarIcon
             tabIndex={isEditable ? 0 : -1}
-            onKeyDown={(e: KeyboardEvent<SVGElement>) =>
-              isEditable && handleSpace(i + 1, e)
-            }
+            onKeyDown={(e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(i + 1, e)}
           />
         </span>
       );
@@ -70,7 +54,7 @@ export const Rating = ({
   };
 
   const handleSpace = (i: number, e: KeyboardEvent<SVGElement>) => {
-    if (e.code != "Space") {
+    if (e.code != 'Space') {
       return;
     }
     setRating?.(i);

@@ -13,7 +13,7 @@ interface ISortProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement
   setSort: (sort: SortEnum) => void;
 }
 
-const Sort: FC<ISortProps> = ({sort, setSort, className, ...props}) => {
+export const Sort: FC<ISortProps> = ({sort, setSort, className, ...props}) => {
   return <div className={cn(styles.sort, className)} {...props}>
   <div className={styles.sortName} id="sort">Сортировка</div>
   <button
@@ -22,7 +22,7 @@ const Sort: FC<ISortProps> = ({sort, setSort, className, ...props}) => {
     className={cn({
       [styles.active]: sort == SortEnum.Rating
     })}
-    aria-selected={sort == SortEnum.Rating}
+    aria-pressed={sort == SortEnum.Rating}
     aria-labelledby="sort rating"
   >
     <SortIcon className={styles.sortIcon} />По рейтингу
@@ -33,7 +33,7 @@ const Sort: FC<ISortProps> = ({sort, setSort, className, ...props}) => {
     className={cn({
       [styles.active]: sort == SortEnum.Price
     })}
-    aria-selected={sort == SortEnum.Price}
+    aria-pressed={sort == SortEnum.Price}
     aria-labelledby="sort price"
   >
     <SortIcon className={styles.sortIcon} />По цене
@@ -41,4 +41,3 @@ const Sort: FC<ISortProps> = ({sort, setSort, className, ...props}) => {
 </div>
 };
 
-export default Sort;

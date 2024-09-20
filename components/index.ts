@@ -5,3 +5,7 @@ export * from "./Tag/Tag";
 export * from "./Rating/Rating";
 export * from "./Card/Card";
 export * from "./HhData/HhData";
+export * from "./Input/Input"
+export * from "./Advantages/Advantages";
+export * from "./Sort/Sort";
+export * from "./Rating/Rating"
