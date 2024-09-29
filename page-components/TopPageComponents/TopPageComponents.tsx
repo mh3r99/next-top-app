@@ -5,6 +5,7 @@ import styles from './TopPageComponents.module.css';
 import { Htag, Tag, HhData, Advantages } from '../../components';
 import  {  Sort, SortEnum } from '../../components/Sort/Sort';
 import { sortReducer } from './sort.reducer';
+import { Product } from '../../components/Product/Product';
 
 interface ITopPageComponentsProps extends Record<string, unknown> {
   firstCategory: TopLevelCategory;
@@ -38,9 +39,9 @@ const TopPageComponents: React.FC<ITopPageComponentsProps> = ({
           </Tag>
         )}
         <Sort sort={sort} setSort={setSort} />
-        <span>Сортировка</span>
       </div>
-      <div>{sortedProducts && sortedProducts.map((p) => <div key={p._id}>{p.title}</div>)}</div>
+      <div>{sortedProducts && sortedProducts.map((product) => <Product key={product._id} product={product}  />
+    )}</div>
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
         <Tag color="red" size="m">

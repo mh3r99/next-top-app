@@ -11,3 +11,5 @@ export * from "./Sort/Sort";
 export * from "./Rating/Rating"
 export * from "./Textarea/Textarea"
 export * from "./Search/Search"
+export * from "./Product/Product"
+export * from "./Divider/Divider"
