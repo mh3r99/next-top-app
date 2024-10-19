@@ -1,27 +1,25 @@
-import { FC, DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
-import styles from "./Card.module.css";
-import cn from "classnames";
+import { FC, DetailedHTMLProps, HTMLAttributes, ReactNode, forwardRef } from 'react';
+import styles from './Card.module.css';
+import cn from 'classnames';
 
-interface CardProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  color?: "white" | "blue";
+interface ICardProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  color?: 'white' | 'blue';
   children: ReactNode;
 }
 
-export const Card: FC<CardProps> = ({
-  color = "white",
-  children,
-  className,
-  ...props
-}) => {
-  return (
-    <div
-      className={cn(styles.card, className, {
-        [styles.blue]: color == "blue",
-      })}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
+export const Card = forwardRef<HTMLDivElement, ICardProps>(
+  ({ color = 'white', children, className, ...props }, ref) => {
+    return (
+      <div
+        className={cn(styles.card, className, {
+          [styles.blue]: color == 'blue',
+        })}
+        ref={ref}
+        {...props}>
+        {children}
+      </div>
+    );
+  },
+);
+
+Card.displayName = 'Card';

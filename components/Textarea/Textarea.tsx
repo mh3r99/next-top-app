@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, FC, forwardRef, TextareaHTMLAttributes } from 'react'
+import React, { DetailedHTMLProps,  forwardRef, TextareaHTMLAttributes } from 'react'
 import { FieldError } from 'react-hook-form';
 import cn from 'classnames';
 import styles from "./Textarea.module.css"

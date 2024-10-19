@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, FC, InputHTMLAttributes, forwardRef } from 'react';
+import React, { DetailedHTMLProps,  InputHTMLAttributes, forwardRef } from 'react';
 import cn from 'classnames';
 import { FieldError } from 'react-hook-form';
 import styles from './Input.module.css';

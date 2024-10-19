@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import styles from './TopPageComponents.module.css';
@@ -28,6 +28,10 @@ const TopPageComponents: React.FC<ITopPageComponentsProps> = ({
       type: sort,
     });
   };
+
+  useEffect(() => {
+		dispatchSort({ type: 'reset', initialState: products });
+	}, [products]);
 
   return (
     <div className={styles.wrapper}>
