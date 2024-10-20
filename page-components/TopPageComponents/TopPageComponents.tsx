@@ -44,7 +44,7 @@ const TopPageComponents: React.FC<ITopPageComponentsProps> = ({
         )}
         <Sort sort={sort} setSort={setSort} />
       </div>
-      <div>{sortedProducts && sortedProducts.map((product) => <Product key={product._id} product={product}  />
+      <div>{sortedProducts && sortedProducts.map((product) => <Product layout key={product._id} product={product}  />
     )}</div>
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>

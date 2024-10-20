@@ -1,16 +1,17 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
-import styles from "./Button.module.css";
-import cn from "classnames";
-import ArrowIcon from "./arrow.svg";
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import styles from './Button.module.css';
+import cn from 'classnames';
+import ArrowIcon from './arrow.svg';
+import { motion } from 'framer-motion';
 
 interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
+  extends Omit<
+    DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+    'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag' | 'ref'
   > {
   children: ReactNode;
-  appearance: "primary" | "ghost";
-  arrow?: "right" | "down";
+  appearance: 'primary' | 'ghost';
+  arrow?: 'right' | 'down' | 'none';
 }
 
 export const Button = ({
@@ -21,23 +22,22 @@ export const Button = ({
   ...props
 }: ButtonProps): JSX.Element => {
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
       className={cn(styles.button, className, {
-        [styles.primary]: appearance == "primary",
-        [styles.ghost]: appearance == "ghost",
+        [styles.primary]: appearance == 'primary',
+        [styles.ghost]: appearance == 'ghost',
       })}
-      {...props}
-    >
+      {...props}>
       {children}
       {arrow && (
         <span
           className={cn(styles.arrow, {
-            [styles.down]: arrow == "down",
-          })}
-        >
+            [styles.down]: arrow == 'down',
+          })}>
           <ArrowIcon />
         </span>
       )}
-    </button>
+    </motion.button>
   );
 };
